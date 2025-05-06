@@ -1,0 +1,1 @@
+[{"sender": "Feedback", "message": "None"}, {"sender": "Action", "message": "Alice: PUT rope_front_end groove_left_end PATH [(-1.20, 0.48, 0.55), (-0.50, 0.49, 0.55), (0.10, 0.50, 0.55), (0.20, 0.50, 0.55), (0.20, 0.50, 0.36)]\nBob: PUT rope_back_end groove_right_end PATH [(-0.52, 0.65, 0.55), (0.24, 0.62, 0.55), (0.74, 0.56, 0.55), (1.00, 0.50, 0.55), (1.00, 0.50, 0.36)]"}]
