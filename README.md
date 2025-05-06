@@ -1,6 +1,6 @@
 
 ## Setup (for Mac system)
-### In this repo, folder "rocobench is the experimental dataset; In folder "rocobench", file "onlyarm copy.xml" is the new scenario created by this project related to construction bricklaying.
+### In this repo, folder "rocobench" is the experimental dataset; In folder "rocobench", file "onlyarm copy.xml" is the new scenario created by this project related to construction bricklaying.
 
 ### setup conda env and package install
 ```
