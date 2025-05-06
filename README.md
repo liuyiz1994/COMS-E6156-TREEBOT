@@ -29,7 +29,7 @@ client = anthropic.Client(api_key=YOUR_OPENAI_KEY)
 streamed = client.completion_stream(...)  
 ```
 
-## Usage 
+## Replicate the experiments 
 ### Run robot control on the Rope-moving Task using the GPT-4/GPT-3.5 model
 ```
 $ conda activate tot_robo
