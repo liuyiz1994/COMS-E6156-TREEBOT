@@ -1,0 +1,110 @@
+  <mujoco model="ur5e table">
+  <compiler angle="radian" autolimits="true"/> 
+  <include file="assets/ur5e/ur5e_assets.xml"/>   
+  <include file="assets/ur5e/ur5e_0_assets.xml"/>   
+  <include file="assets/robotiq/robotiq_assets.xml"/>    
+  <include file="assets/panda/panda_assets.xml"/>   
+  <include file="assets/scene_assets.xml"/>
+  <include file="assets/object_assets.xml"/>
+  
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6"  ambient="0.1 0.1 0.1" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20" offwidth="2000" offheight="2000"/>
+    <quality shadowsize="4096"/>
+  </visual>
+   
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" pos="0 0 -0.5" size="0 0 0.05" type="plane" material="groundplane"/>
+
+    <!-- adding a table box -->
+    <body name="table" pos="0 0.5 0">
+      <geom name="table_collision" pos="0 0 0.1" size="1.6 0.4 0.05" type="box" group="0" friction="1 0.005 0.0001" rgba="1 1 1 1"/>
+      <body name="table_top" pos="0 0 0.1">
+        <geom name="table_top" size="1.6 0.4 0.05" type="box" conaffinity="0" contype="0" group="1" rgba="1 1 1 1"/>
+        <site name="table_top" size="0.001 0.001 0.001" class="site_top"/> 
+      </body>
+      
+      <geom name="table_left" pos="-1.63 0 1" size="0.02 1.6 1.5" rgba="1 1 1 0" type="box"/>
+      <geom name="table_right" pos="1.63 0 1" size="0.02 1.6 1.5" rgba="1 1 1 0" type="box"/>
+      <geom name="table_front" pos="0 1.63 1" size="1.7 0.02 1.5" rgba="1 1 1 0" type="box"/>
+      <geom name="table_back" pos="0 -1.63 1" size="1.7 0.02 1.5" rgba="1 1 1 0" type="box"/>
+      
+    </body> 
+    <!--  the arm! -->
+    <body name="ur5e_robotiq" pos="-0.4 -0.2 0.15" > 
+      <include file="assets/ur5e/ur5e_robotiq.xml" />
+    </body>
+    <!-- the franka panda -->
+    <body name="panda" pos="-0.5 1.1 0.1" >
+      <include file="assets/panda/panda_include.xml" />
+    </body> 
+    <!-- <body name="ur5e_suction" pos="-0.4 1.1 0.15" >
+      <include file="assets/ur5e/ur5e_suction.xml" />
+    </body> -->
+ 
+
+    <body name="groove" pos="0.6 0.5 0.16">
+      <!-- NOTE(Mandi): changed all rgba="1 0 0 1" to rgba="0 0 1 0" to better display the wood texture -->
+      <!-- bottom plane: -->
+      <body name="groove_bottom" pos="0 0 0">
+        <geom pos="0 0 0" size="0.45 0.08 0.03" type="box" group="0" friction="1 0.005 0.0001" material="quiet-black" />  
+      </body>
+      <!-- front plane" -->
+      <geom name="groove_front" pos="0 0.1 0" size="0.45 0.06 0.08" type="box" group="0" friction="1 0.005 0.0001" material="quiet-black" />  
+      <!-- back plane: -->
+      <geom name="groove_back" pos="0 -0.1 0" size="0.45 0.06 0.08" type="box" group="0" friction="1 0.005 0.0001"  material="quiet-black"/> 
+      <!-- right plane: -->
+       
+      <site name="groove_front" pos="0 -0.1 0.2" size="0.001 0.001 0.001" class="site_top"/>
+      <site name="groove_back" pos="0 0.1 0.2" size="0.001 0.001 0.001" class="site_top"/>
+
+      <site name="groove_left_end" pos="-0.4 0 0.2" rgba='1 0 0 1' type='cylinder' size='0.003 0.006' quat="1 0 0 0"  />
+       
+      <site name="groove_right_end" pos="0.4 0 0.2" rgba='1 0 1 1' type='cylinder' size='0.003 0.006' quat="1 0 0 0"  />
+     </body>
+
+
+    <body name="obstacle_wall" pos="0 0.5 0.25"> 
+      <geom name="obstacle_wall" pos="0 0 0" size="0.03 0.3 0.08" type="box" group="0" friction="1 0.005 0.0001" material="jointgray" />  
+      <site name="obstacle_wall_front_top" pos="0 -0.3 0.25"  rgba='1 0 0 1' type='cylinder' size='0.003 0.006' quat="1 0 0 0"  /> 
+      <site name="obstacle_wall_back_top" pos="0 0.3 0.25"  rgba='1 1 0 1' type='cylinder' size='0.003 0.006' quat="1 0 0 0"  />
+      
+      <site name="obstacle_wall_back_bottom" pos="0 0.3 -0.1"  class="site_bottom"/>
+      <site name="obstacle_wall_front_bottom" pos="0 -0.3 -0.1"  class="site_bottom"/>
+    </body>
+
+
+
+    <body name="rebar2" pos="-1.2 0.5 0.2">
+      <geom name="rebar_front_2" pos="0 0 0" size="0.003 0.3 0.003" type="box" group="0" friction="1 0.005 0.0001" rgba="0.78 0.215 0.184 1" />
+      <site name="rebar_front_top_2" pos="0 -0.1 0.25"  rgba='1 0 0 1' type='cylinder' size='0.003 0.0006' quat="1 0 0 0"  />
+      <site name="rebar_back_top_2" pos="0 0.1 0.25"  rgba='1 1 0 1' type='cylinder' size='0.003 0.0006' quat="1 0 0 0"  />
+
+      <site name="rebar_back_bottom_2" pos="0 0.1 -0.1"  class="site_bottom"/>
+      <site name="rebar_front_bottom_2" pos="0 -0.1 -0.1"  class="site_bottom"/>
+    </body>
+
+
+    <camera mode="fixed" name="face_panda" pos="0.062 -2.806 0.768" xyaxes="1.000 0.009 -0.000 0.001 -0.131 0.991"/>
+    <camera mode="fixed" name="face_ur5e" pos="0.084 3.711 0.772" xyaxes="-1.000 0.016 0.000 0.002 0.111 0.994"/>
+    
+    <!-- <camera mode="fixed" name="top_cam" pos="0.017 0.690 3.624" xyaxes="-1.000 -0.000 -0.000 0.000 -1.000 0.022"/> -->
+    <camera mode="fixed" name="top_cam" pos="-0.001 0.652 2.057" xyaxes="-1.000 -0.000 -0.000 0.000 -1.000 0.019"/>
+    <camera mode="fixed" name="right_cam" pos="1.873 0.605 0.926" xyaxes="0.014 1.000 0.000 -0.242 0.003 0.970"/>
+    <camera mode="fixed" name="left_cam" pos="-1.873 0.605 0.926" xyaxes="-0.000 -1.000 0.000 0.177 -0.000 0.984"/>
+    <camera name="teaser" pos="2.675 -0.747 1.997" xyaxes="0.496 0.869 -0.000 -0.429 0.245 0.869"/>
+    <camera name='video' pos="1.957 -0.281 1.731" xyaxes="0.487 0.874 0.000 -0.500 0.278 0.820"/>
+
+
+  </worldbody> 
+
+
+
+  <contact>
+    <pair geom1="panda_hand_collision" geom2="obstacle_wall" margin="0.1" />
+    <pair geom1="robotiq_collision" geom2="obstacle_wall" margin="0.1" />
+  </contact>
+ 
+</mujoco>
