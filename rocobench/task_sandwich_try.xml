@@ -1,0 +1,85 @@
+  <mujoco model="ur5e table">
+  <!--  meshdir="assets" texturedir="assets" autolimits="true"/>  -->
+  <compiler angle="radian" autolimits="true"/> 
+  <!-- <statistic center="0.3 0 0.4" extent="0.8"/>  -->
+  <include file="assets/ur5e/ur5e_assets.xml"/>   
+  <include file="assets/ur5e/ur5e_1_assets.xml"/>  
+  <include file="assets/ur5e/suction_assets.xml"/>  
+  <include file="assets/humanoid_assets.xml"/>
+  <include file="assets/scene_assets.xml"/>
+  <include file="assets/object_assets.xml"/>
+  
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6"  ambient="0.1 0.1 0.1" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20"/>
+  </visual>
+ 
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" pos="0 0 -0.5" size="0 0 0.05" type="plane" material="groundplane"/> 
+    <!-- adding a table box -->
+    <body name="table" pos="0 0.5 0">
+      <geom name="table_collision" pos="0 0 0.1" size="1.6 0.4 0.05" type="box" group="0" friction="1 0.5 0.0001" rgba="1 1 1 1"/>
+      <body name="table_top" pos="0 0 0.1">
+        <geom name="table_top" size="1.6 0.4 0.05" type="box" conaffinity="0" contype="0" group="1" rgba="1 1 1 1"/>
+       
+      </body>
+      
+      <geom name="table_left" pos="-1.63 0 1" size="0.02 1.6 1.5" rgba="1 1 1 0" type="box"/>
+      <geom name="table_right" pos="1.63 0 1" size="0.02 1.6 1.5" rgba="1 1 1 0" type="box"/>
+      <geom name="table_front" pos="0 1.63 1" size="1.7 0.02 1.5" rgba="1 1 1 0" type="box"/>
+      <geom name="table_back" pos="0 -1.63 1" size="1.7 0.02 1.5" rgba="1 1 1 0" type="box"/>
+ 
+    </body> 
+
+    <body name="humanoid" pos="0.2 1.06 0.17" > 
+      <include file="assets/humanoid_include.xml" />
+    </body>
+     
+
+    <body name="ur5e_suction" pos="-0.1 -0.2 0.1"  > 
+      <include file="assets/ur5e/ur5e_suction.xml" />
+    </body>
+
+    <geom name="panel1" pos="-0.8 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel2" pos="-0.8 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    
+    <geom name="panel3" pos="-0.6 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel4" pos="-0.6 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    
+    <geom name="panel5" pos="-0.4 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel6" pos="-0.4 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+     
+    <geom name="panel7" pos="0.4 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel8" pos="0.4 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+
+    <geom name="panel9" pos="0.6 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel10" pos="0.6 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+
+    <geom name="panel11" pos="0.8 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel12" pos="0.8 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+
+    <geom name="panel13" pos="1.0 0.6 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+    <geom name="panel14" pos="1.0 0.4 0.2" size="0.05 0.05 0.01" type="box" conaffinity="0" contype="0"  group="1" mass="0.00001" friction="1 0.005 0.0001" rgba="1 1 0 0" />
+
+
+
+ 
+    <camera mode="fixed" name="face_panda" pos="0.062 -2.806 0.768" xyaxes="1.000 0.009 -0.000 0.001 -0.131 0.991"/>
+    <camera mode="fixed" name="face_ur5e" pos="0.084 3.711 0.772" xyaxes="-1.000 0.016 0.000 0.002 0.111 0.994"/>
+    <camera mode="fixed" name="top_cam" pos="-0.001 0.652 2.057" xyaxes="-1.000 -0.000 -0.000 0.000 -1.000 0.019"/>
+    <camera mode="fixed" name="right_cam" pos="1.873 0.605 0.926" xyaxes="0.014 1.000 0.000 -0.242 0.003 0.970"/>
+    <camera mode="fixed" name="left_cam" pos="-1.873 0.605 0.926" xyaxes="-0.000 -1.000 0.000 0.177 -0.000 0.984"/>
+    <camera name="teaser" pos="2.675 -0.747 1.997" xyaxes="0.496 0.869 -0.000 -0.429 0.245 0.869"/>
+    <camera name='recipe' pos="1.257 -0.407 1.244" xyaxes="0.579 0.815 0.000 -0.401 0.285 0.871"/>
+    <camera name='video' pos="1.957 -0.281 1.731" xyaxes="0.487 0.874 0.000 -0.500 0.278 0.820"/>
+
+
+  </worldbody> 
+
+
+   
+ 
+</mujoco>
+
