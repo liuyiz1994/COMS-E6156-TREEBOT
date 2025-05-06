@@ -17,7 +17,7 @@ pip install -r requirements.txt
 ```
 
 ### Acquire OpenAI
-This is required for prompting GPTs. Put your key string somewhere safely in your local repo, and provide a file path (something like `./roco/openai_key.json`) and load them in the scripts. Example code snippet:
+This is required for prompting GPTs. Put your key string somewhere safely in your local repo, and provide a file path (something like `./tot_robo/openai_key.json`) and load them in the scripts. Example code snippet:
 ```
 import openai  
 openai.api_key = YOUR_OPENAI_KEY
