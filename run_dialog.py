@@ -24,9 +24,7 @@ TASK_NAME_MAP = {
     "sort": SortOneBlockTask,
     "cabinet": CabinetTask,
     "rope": MoveRopeTask,
-    "sweep": SweepTask,
-    "sandwich": MakeSandwichTask,
-    "pack": PackGroceryTask,
+    "cont": BricklayingTask
 }
 
 class LLMRunner:
@@ -44,7 +42,7 @@ class LLMRunner:
         data_dir: str = "data",
         overwrite: bool = False,
         llm_output_mode="action_only", # "action_only" or "action_and_path"
-        llm_comm_mode="chat",
+        llm_comm_mode="chat", #tot #action
         llm_num_replans=1,
         give_env_feedback=True,
         skip_display=False,
@@ -117,7 +115,7 @@ class LLMRunner:
             step_std_threshold=self.env.waypoint_std_threshold,
             max_failed_waypoints=self.max_failed_waypoints,
         )
-        if llm_comm_mode in ["plan", "chat"]:
+        if llm_comm_mode in ["plan", "chat", "tot"]:
             logging.warning(f'Using SingleThreadPrompter for {llm_comm_mode} mode')
             self.prompter = SingleThreadPrompter(
                 env=self.env,
@@ -470,15 +468,15 @@ if __name__ == "__main__":
     parser.add_argument("--num_runs", '-nruns', type=int, default=1)
     parser.add_argument("--run_name", "-rn", type=str, default="test")
     parser.add_argument("--tsteps", "-t", type=int, default=10)
-    parser.add_argument("--task", type=str, default="sort_one")
+    parser.add_argument("--task", type=str, default="rope")
     parser.add_argument("--output_mode", type=str, default="action_only", choices=["action_only", "action_and_path"])
-    parser.add_argument("--comm_mode", type=str, default="dialog", choices=["chat", "plan", "dialog"])
+    parser.add_argument("--comm_mode", type=str, default="dialog", choices=["chat", "plan", "dialog", "tot"])
     parser.add_argument("--control_freq", "-cf", type=int, default=15)
     parser.add_argument("--skip_display", "-sd", action="store_true")
     parser.add_argument("--direct_waypoints", "-dw", type=int, default=5)
     parser.add_argument("--num_replans", "-nr", type=int, default=5)
     parser.add_argument("--cont", "-c", action="store_true")
-    parser.add_argument("--load_run_name", "-lr", type=str, default="sort_task")
+    parser.add_argument("--load_run_name", "-lr", type=str, default="rope")
     parser.add_argument("--load_run_id", "-ld", type=int, default=0)
     parser.add_argument("--max_failed_waypoints", "-max", type=int, default=1)
     parser.add_argument("--debug_mode", "-i", action="store_true")
